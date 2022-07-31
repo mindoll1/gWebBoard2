@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+
+<insert id="userInsert" parameterType="MemberVO">
+INSERT INTO member(USERID,USERPASS,USERNAME)VALUES(#{userId},#{userPass},#{userName})
+</insert>
+
+
+<select id="idCheck" parameterType="MemberVO" resultType="MemberVO" >
+
+SELECT *
+FROM member
+WHERE userid = #{userId}
+<if test='userPass != null'><!--유저패스가 들어오면은  -->
+AND userPass = #{userPass}
+</if>
+</select>
+
+
+<select id='gonziList' parameterType="GonziVO" resultType="GonziVO">
+<![CDATA[
+SELECT * FROM gonzi
+ORDER BY gonzi_no DESC
+]]>
+</select>
+
+
+</mapper>
